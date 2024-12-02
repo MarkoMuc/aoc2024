@@ -5,4 +5,6 @@ This is not a generic (number of input IDs is set by a macro) nor optimized solu
 ## Statistics
 
 - Overall time: 0:32h
-- Difficulty: Super easy, wasted a lot of time on a misdefined macro for the array size.
+- Difficulty: Super easy
+- Notes:
+    1. Wasted a lot of time on a misdefined macro for the array size.
