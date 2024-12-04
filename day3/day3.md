@@ -1,4 +1,4 @@
-# Day 2 of AoC 2024
+# Day 1 of AoC 2024
 
 This is not a generic (number of input IDs is set by a macro) nor optimized solution. 
 
