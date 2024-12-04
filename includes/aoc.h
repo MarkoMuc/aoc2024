@@ -5,6 +5,7 @@
 
 #ifdef DEBUG
 int read_line(FILE *f, char** line, size_t *size);
+int get_num(char *line, size_t len, size_t *start, int second)
 #endif
 
 #ifndef DEBUG
@@ -76,5 +77,26 @@ int read_newline(FILE *f, char** line, size_t *size) {
 
     return line_len == 0? -1 : line_len;
 }
+
+int get_num(char *line, size_t len, size_t *start, int second) {
+    int idx = *start;
+    int num = 0;
+    if(*start >= len - 1) {
+        return -1;
+    }
+
+    for(; idx < len; idx++) {
+
+        if(line[idx] >= '0' && line[idx] <= '9') {
+            num = num * 10 + (line[idx] - '0');
+        }else {
+            break;
+        }
+    }
+
+    *start = idx;
+    return num;
+}
+
 #endif
 
