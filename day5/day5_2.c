@@ -53,16 +53,10 @@ int main() {
     bool rules = true;
     long sum = 0;
 
-    int **r_arr = malloc(MAX_ARR_ROW * sizeof(*r_arr));
-    for(int i = 0; i < MAX_ARR_ROW; i++) {
-        r_arr[i] = malloc(MAX_ARR_COL * sizeof(r_arr[i]));
-        for(int j = 0; j < MAX_ARR_COL; j++){
-            r_arr[i][j] = 0;
-        }
-    }
+    int **r_arr = num_matrix(MAX_ARR_ROW, MAX_ARR_COL);
 
-    int n_size = MAX_ARR_COL;
-    int *n_arr = malloc(n_size * sizeof(*n_arr));
+    size_t n_size = MAX_ARR_COL;
+    int *n_arr;
 
     while((read = read_newline(f, &line, &size)) > 0) {
         if(read <= 1) { 
@@ -77,18 +71,7 @@ int main() {
             r_arr[X][Y] = BEFORE;
             r_arr[Y][X] = AFTER;
         }else{
-            int i = 0;
-            for(; idx < read - 1; i++){
-                if(i >= n_size) {
-                    n_size = n_size * 2;
-                    n_arr = realloc(n_arr, n_size * sizeof(*n_arr));
-                }
-                int Y = get_num(line, read, &idx);
-                idx++;
-
-                n_arr[i] = Y;
-            }
-
+            int i = line_to_row(line, read, &n_arr, &n_size, 1);
             sum += calculate(r_arr, n_arr, i);
         }
     }
@@ -96,12 +79,8 @@ int main() {
     printf("%ld\n", sum);
 
     fclose(f);
-
-    for(int i = 0; i < MAX_ARR_ROW; i++) {
-        free(r_arr[i]);
-    }
+    free_matrix(r_arr, MAX_ARR_COL);
     free(line);
-    free(r_arr);
     free(n_arr);
     exit(0);
 }
