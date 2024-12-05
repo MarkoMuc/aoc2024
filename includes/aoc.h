@@ -3,12 +3,12 @@
 
 #define __DEFAULT__LINE__SIZE__ 256
 
-#ifdef DEBUG
-int read_line(FILE *f, char** line, size_t *size);
-int get_num(char *line, size_t len, size_t *start, int second)
-#endif
+#define free_matrix(mtrx, row) \
+    do{ \
+        for(int i = 0; i < (row); i++) free((mtrx)[i]);\
+        free((mtrx));\
+    }while(0)
 
-#ifndef DEBUG
 int read_newline(FILE *f, char** line, size_t *size) {
     size_t line_size = *size;
     long line_len = 0;
@@ -26,7 +26,7 @@ int read_newline(FILE *f, char** line, size_t *size) {
     if(*line == NULL) {
         line_size = line_size > 0? line_size: __DEFAULT__LINE__SIZE__;
         *size = line_size;
-        *line = malloc(line_size * sizeof(*line));
+        *line = malloc(line_size * sizeof(**line));
         if(*line == NULL) {
             printf("Failed to allocate to size %u", line_size);
             exit(0);
@@ -98,5 +98,44 @@ int get_num(char *line, size_t len, size_t *start) {
     return num;
 }
 
-#endif
+int **num_matrix(long row, long col) {
+    int **matrix = malloc(row * sizeof(*matrix));
+    for(long i = 0; i < row; i++) {
+        matrix[i] = malloc(col * sizeof(**matrix));
+        for(long j = 0; j < col; j++){
+            matrix[i][j] = 0;
+        }
+    }
+    return matrix;
+}
 
+size_t line_to_row(char *line, size_t read, int **arr, size_t *size, int sep_count) {
+    int arr_size = *size;
+    if(*arr != NULL && arr_size == 0) {
+        printf("Array allocated but line len is set to 0.\n");
+        exit(1);
+    }
+
+    if(*arr == NULL) {
+        arr_size = arr_size > 0? arr_size: __DEFAULT__LINE__SIZE__;
+        *size = arr_size;
+        *arr = calloc(arr_size, sizeof(**arr));
+        if(*arr == NULL) {
+            printf("Failed to allocate to size %u", arr_size);
+            exit(0);
+        }
+    }
+
+    int i = 0;
+    for(size_t idx = 0; idx < read - 1; i++){
+        if(i >= arr_size) {
+            arr_size = arr_size * 2;
+            *arr = realloc(arr, arr_size * sizeof(**arr));
+        }
+        int Y = get_num(line, read, &idx);
+        idx += sep_count;
+
+        (*arr)[i] = Y;
+    }
+    return i;
+}
