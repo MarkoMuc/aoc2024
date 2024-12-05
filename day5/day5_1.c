@@ -13,7 +13,7 @@
 long calculate(int **rules, int *nums, int size) {
     for(int i = 0; i < size; i++){
         int X = nums[i];
-        for(int j = 0; j < size; j ++) {
+        for(int j = i+1; j < size; j ++) {
             if(i == j) continue;
             int Y = nums[j];
             if((j<i && rules[Y][X] == AFTER) ||
