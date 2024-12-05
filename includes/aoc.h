@@ -78,7 +78,7 @@ int read_newline(FILE *f, char** line, size_t *size) {
     return line_len == 0? -1 : line_len;
 }
 
-int get_num(char *line, size_t len, size_t *start, int second) {
+int get_num(char *line, size_t len, size_t *start) {
     int idx = *start;
     int num = 0;
     if(*start >= len - 1) {
