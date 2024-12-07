@@ -112,7 +112,7 @@ int main() {
     size_t size = 0;
     char* line = NULL;
     int read;
-    size_t rows = 0;
+    size_t rows = 0; 
     uint128_t *result = malloc(MAX_ROWS * sizeof(uint128_t));
     dyarr *eq = malloc(MAX_ROWS * sizeof(dyarr));
 
@@ -132,7 +132,13 @@ int main() {
         rows++;
     }
 
-    print_uint128( calibration(result, eq, rows));
+    print_uint128(calibration(result, eq, rows));
+
+    for(int i = 0; i < rows; i++){
+        free(eq[i].el);
+    }
+    free(eq);
+    free(result);
     fclose(f);
     free(line);
     exit(0);

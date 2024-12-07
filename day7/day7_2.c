@@ -181,6 +181,12 @@ int main() {
     }
 
     print_uint128( calibration(result, eq, rows));
+    
+    for(int i = 0; i < rows; i++){
+        free(eq[i].el);
+    }
+    free(eq);
+    free(result);
     fclose(f);
     free(line);
     exit(0);
