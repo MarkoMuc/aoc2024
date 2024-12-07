@@ -4,7 +4,7 @@ This is not a generic (number of input IDs is set by a macro) nor optimized solu
 
 ## Statistics
 
-- Overall time: 3:05h
+- Overall time:
     - Part 1: 00:42h
     - Part 2: 02:23h
 - Difficulty: Easy.
