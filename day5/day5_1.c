@@ -34,25 +34,25 @@ int main() {
     bool rules = true;
     long sum = 0;
 
-    int **r_arr = num_matrix(MAX_ARR_ROW, MAX_ARR_COL);
+    int **r_arr = aoc_num_matrix(MAX_ARR_ROW, MAX_ARR_COL);
 
     size_t n_size = MAX_ARR_COL;
     int *n_arr;
 
-    while((read = read_newline(f, &line, &size)) > 0) {
+    while((read = aoc_read_newline(f, &line, &size)) > 0) {
         if(read <= 1) { 
             rules = false;
             continue;
         }
         size_t idx = 0;
         if(rules) {
-            int X = get_num(line, read, &idx);
+            int X = aoc_get_num(line, read, &idx);
             idx++;
-            int Y = get_num(line, read, &idx);
+            int Y = aoc_get_num(line, read, &idx);
             r_arr[X][Y] = BEFORE;
             r_arr[Y][X] = AFTER;
         }else{
-            int i = line_to_row(line, read, &n_arr, &n_size, 1);
+            int i = aoc_line_to_nums(line, read, &n_arr, &n_size, 1);
             sum += calculate(r_arr, n_arr, i);
         }
     }
@@ -60,7 +60,7 @@ int main() {
     printf("%ld\n", sum);
 
     fclose(f);
-    free_matrix(r_arr, MAX_ARR_ROW);
+    aoc_free_matrix(r_arr, MAX_ARR_ROW);
     free(line);
     free(n_arr);
     exit(0);

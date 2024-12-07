@@ -32,7 +32,7 @@ int main() {
     long array_size = 256;
     int *array = malloc(array_size*sizeof(int));
 
-    while((read = read_newline(f, &line, &size)) > 0) {
+    while((read = aoc_read_newline(f, &line, &size)) > 0) {
         size_t start = 0;
         int i = 0;
 

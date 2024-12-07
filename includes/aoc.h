@@ -3,13 +3,13 @@
 
 #define __DEFAULT__LINE__SIZE__ 256
 
-#define free_matrix(mtrx, row) \
+#define aoc_free_matrix(mtrx, row) \
     do{ \
         for(int i = 0; i < (row); i++) free((mtrx)[i]);\
         free((mtrx));\
     }while(0)
 
-int read_newline(FILE *f, char** line, size_t *size) {
+int aoc_read_newline(FILE *f, char** line, size_t *size) {
     size_t line_size = *size;
     long line_len = 0;
 
@@ -78,7 +78,7 @@ int read_newline(FILE *f, char** line, size_t *size) {
     return line_len == 0? -1 : line_len;
 }
 
-int get_num(char *line, size_t len, size_t *start) {
+int aoc_get_num(char *line, size_t len, size_t *start) {
     int idx = *start;
     int num = 0;
     if(*start >= len - 1) {
@@ -98,7 +98,7 @@ int get_num(char *line, size_t len, size_t *start) {
     return num;
 }
 
-int **num_matrix(long row, long col) {
+int **aoc_num_matrix(long row, long col) {
     int **matrix = malloc(row * sizeof(*matrix));
     for(long i = 0; i < row; i++) {
         matrix[i] = malloc(col * sizeof(**matrix));
@@ -109,7 +109,7 @@ int **num_matrix(long row, long col) {
     return matrix;
 }
 
-size_t line_to_row(char *line, size_t read, int **arr, size_t *size, int sep_count) {
+size_t aoc_line_to_nums(char *line, size_t read, int **arr, size_t *size, int sep_count) {
     int arr_size = *size;
     if(*arr != NULL && arr_size == 0) {
         printf("Array allocated but line len is set to 0.\n");
@@ -132,7 +132,7 @@ size_t line_to_row(char *line, size_t read, int **arr, size_t *size, int sep_cou
             arr_size = arr_size * 2;
             *arr = realloc(arr, arr_size * sizeof(**arr));
         }
-        int Y = get_num(line, read, &idx);
+        int Y = aoc_get_num(line, read, &idx);
         idx += sep_count;
 
         (*arr)[i] = Y;

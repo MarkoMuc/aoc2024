@@ -126,7 +126,7 @@ int main() {
     int read;
     long value = 0;
 
-    while((read = read_newline(f, &line, &size)) > 0) {
+    while((read = aoc_read_newline(f, &line, &size)) > 0) {
         value += parse_line(line, read);
     }
 

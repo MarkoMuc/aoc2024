@@ -168,7 +168,7 @@ int main() {
 
     int px = -1;
     int py = -1;
-    while((read = read_newline(f, &lines[rows], &size)) > 0) {
+    while((read = aoc_read_newline(f, &lines[rows], &size)) > 0) {
         if(len == 0){
             len = read - 1;
         }
@@ -186,7 +186,7 @@ int main() {
         rows++;
     }
 
-    int **mtrx_steps = num_matrix(rows, len);
+    int **mtrx_steps = aoc_num_matrix(rows, len);
     step_arr **walk_mtrx = malloc(rows * sizeof(*walk_mtrx));
 
     for(long i = 0; i < rows; i++) {
@@ -213,7 +213,6 @@ int main() {
     for(int i = 0; i < rows; i++) free(lines[i]);
     free(lines);
 
-    for(int i = 0; i < rows; i++) free(mtrx_steps[i]);
-    free(mtrx_steps);
+    aoc_free_matrix(mtrx_steps, rows);
     exit(0);
 }

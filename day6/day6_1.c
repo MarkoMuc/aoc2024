@@ -94,7 +94,7 @@ int main() {
 
     int px = -1;
     int py = -1;
-    while((read = read_newline(f, &lines[rows], &size)) > 0) {
+    while((read = aoc_read_newline(f, &lines[rows], &size)) > 0) {
         if(len == 0){
             len = read - 1;
         }
@@ -112,8 +112,6 @@ int main() {
         rows++;
     }
     printf("%ld\n", play_game(lines, rows, len, px, py));
-
-    for(int i = 0; i < rows; i++) printf("%s\n",lines[i]);
 
     fclose(f);
     for(int i = 0; i < rows; i++) free(lines[i]);

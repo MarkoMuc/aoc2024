@@ -27,7 +27,7 @@ int main() {
     int read;
 
     int correct_lines = 0;
-    while((read = read_newline(f, &line, &size)) > 0) {
+    while((read = aoc_read_newline(f, &line, &size)) > 0) {
         int correct = 1;
         size_t start = 0;
         int num1 = get_num(line, read, &start);

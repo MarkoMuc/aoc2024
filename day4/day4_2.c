@@ -40,7 +40,7 @@ int main() {
     int cols = 0;
     char** lines = malloc(150 * sizeof(*lines));
 
-    while((read = read_newline(f, &lines[rows], &size)) > 0) {
+    while((read = aoc_read_newline(f, &lines[rows], &size)) > 0) {
         if(cols == 0) {
             cols = read - 1;
         }
